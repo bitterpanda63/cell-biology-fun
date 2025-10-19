@@ -1,21 +1,13 @@
+import {Deoxyribose, Ribose, Sugar} from "./sugar";
 
-interface Sugar {
-    name: string;
-    chemicalFormula: string;
-}
-
-interface Base {
+export interface Base {
     name: string;
     symbol: string;
     bondsWith: (base: Base) => boolean;
+    worksWithSugar(sugar: Sugar): boolean;
 }
 
-class Deoxyribose implements Sugar {
-    name = "Deoxyribose";
-    chemicalFormula = "C5H10O4";
-}
-
-class Adenine implements Base {
+export class Adenine implements Base {
     name = "Adenine";
     symbol = "A";
     bondsWith(base: Base) {
@@ -29,9 +21,12 @@ class Adenine implements Base {
         }
         return false;
     }
+    worksWithSugar(sugar: Sugar) {
+        return true;
+    }
 }
 
-class Thymine implements Base {
+export class Thymine implements Base {
     name = "Thymine";
     symbol = "T";
     bondsWith(base: Base) {
@@ -41,9 +36,13 @@ class Thymine implements Base {
         }
         return false;
     }
+    worksWithSugar(sugar: Sugar) {
+        return sugar instanceof Deoxyribose;
+    }
 }
 
-class Cytosine implements Base {
+
+export class Cytosine implements Base {
     name = "Cytosine";
     symbol = "C";
     bondsWith(base: Base) {
@@ -53,9 +52,12 @@ class Cytosine implements Base {
         }
         return false;
     }
+    worksWithSugar(sugar: Sugar) {
+        return true;
+    }
 }
 
-class Guanine implements Base {
+export class Guanine implements Base {
     name = "Guanine";
     symbol = "G";
     bondsWith(base: Base) {
@@ -65,9 +67,12 @@ class Guanine implements Base {
         }
         return false;
     }
+    worksWithSugar(sugar: Sugar) {
+        return true;
+    }
 }
 
-class Uracil implements Base {
+export class Uracil implements Base {
     name = "Uracil";
     symbol = "U";
     bondsWith(base: Base) {
@@ -77,37 +82,7 @@ class Uracil implements Base {
         }
         return false;
     }
-}
-
-class Nucleotide {
-    sugar: Sugar;
-    base: Base;
-    phosphateBondedWith?: Nucleotide;
-    sugarBondedWith?: Nucleotide;
-    baseBondedWith?: Nucleotide;
-
-    constructor(sugar: Sugar, base: Base) {
-        this.sugar = sugar;
-        this.base = base;
-    }
-
-    describe(): string {
-        return `This nucleotide has a ${this.sugar.name} sugar and a ${this.base.name} (${this.base.symbol}) base.`;
-    }
-    bindPhosphateGroup(nucleotide: Nucleotide) {
-        this.phosphateBondedWith = nucleotide;
-    }
-    bindSugar(nucleotide: Nucleotide) {
-        this.sugarBondedWith = nucleotide;
-    }
-    bindBase(nucleotide: Nucleotide) {
-        if (nucleotide.base.bondsWith(this.base)) {
-            this.baseBondedWith = nucleotide;
-            nucleotide.baseBondedWith = this;
-        }
+    worksWithSugar(sugar: Sugar) {
+        return sugar instanceof Ribose;
     }
 }
-
-(() => {
-    console.log(new Nucleotide(new Deoxyribose(), new Adenine()).describe());
-})();
