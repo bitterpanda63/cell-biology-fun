@@ -104,3 +104,32 @@ export function codonToAminoAcid(codon: Base[]): AminoAcid | Stop {
 }
 class Stop {
 }
+
+// make sure wind rose works :
+function createAminoAcidCodonTable() {
+    const bases = [new Uracil(), new Adenine(), new Guanine(), new Cytosine()];
+    const combinations = [];
+    for (let i = 0; i < bases.length; i++) {
+        for (let j = 0; j < bases.length; j++) {
+            for (let k = 0; k < bases.length; k++) {
+                combinations.push([bases[i], bases[j], bases[k]]);
+            }
+        }
+    }
+
+    const table: any = {"stop": []}
+    combinations.forEach(x => {
+        const bases: Base[] = x.filter(x => !!x);
+        const basesStr = bases.map(base => base.symbol).join("");
+        const codon = codonToAminoAcid(bases);
+        if (codon instanceof Stop) {
+            table["stop"].push(basesStr);
+        } else {
+            if (!table[codon.name]) {
+                table[codon.name] = [];
+            }
+            table[codon.name].push(basesStr);
+        }
+    });
+    return table;
+}
