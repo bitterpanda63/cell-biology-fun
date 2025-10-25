@@ -29,76 +29,76 @@ export function codonToAminoAcid(codon: Base[]): AminoAcid | Stop {
     if (c5 instanceof Uracil) {
         if (c4 instanceof Uracil) {
             if (c3 instanceof Uracil || c3 instanceof Cytosine) {
-                return Phenylalanine;
+                return new Phenylalanine();
             } else {
-                return Leucine;
+                return new Leucine();
             }
         } else if (c4 instanceof Cytosine) {
-            return Serine;
+            return new Serine();
         } else if (c4 instanceof Adenine) {
             if (c3 instanceof Uracil || c3 instanceof Cytosine) {
-                return Tyrosine;
+                return new Tyrosine();
             } else {
-                return Stop;
+                return new Stop();
             }
         } else {
             if (c3 instanceof Uracil || c3 instanceof Cytosine) {
-                return Cysteine;
+                return new Cysteine();
             } else if (c3 instanceof Adenine) {
-                return Stop;
+                return new Stop();
             } else {
-                return Tryptophan;
+                return new Tryptophan();
             }
         }
     } else if (c5 instanceof Cytosine) {
         if (c4 instanceof Uracil) {
-            return Leucine;
+            return new Leucine();
         } else if (c4 instanceof Cytosine) {
-            return Proline;
+            return new Proline();
         } else if(c4 instanceof Adenine) {
             if (c3 instanceof Uracil || c3 instanceof Cytosine) {
-                return Histidine;
+                return new Histidine();
             } else {
-                return Glutamine;
+                return new Glutamine();
             }
         } else {
-            return Arginine;
+            return new Arginine();
         }
     } else if (c5 instanceof Adenine) {
         if (c4 instanceof Uracil) {
             if (c3 instanceof Guanine) {
-                return Methionine;
+                return new Methionine();
             } else {
-                return Isoleucine;
+                return new Isoleucine();
             }
         } else if(c4 instanceof Cytosine) {
-            return Threonine;
+            return new Threonine();
         } else if(c4 instanceof Adenine) {
             if (c3 instanceof Uracil || c3 instanceof Cytosine) {
-                return Asparagine;
+                return new Asparagine();
             } else {
-                return Lysine;
+                return new Lysine();
             }
         } else {
             if (c3 instanceof Uracil || c3 instanceof Cytosine) {
-                return Serine;
+                return new Serine();
             } else {
-                return Arginine;
+                return new Arginine();
             }
         }
     } else {
         if (c4 instanceof Uracil) {
-            return Valine;
+            return new Valine();
         } else if(c4 instanceof Cytosine) {
-            return Alanine;
+            return new Alanine();
         } else if(c4 instanceof Adenine) {
             if (c3 instanceof Uracil || c3 instanceof Cytosine) {
-                return AsparticAcid;
+                return new AsparticAcid();
             } else {
-                return GlutamicAcid;
+                return new GlutamicAcid();
             }
         } else {
-            return Glycine;
+            return new Glycine();
         }
     }
 }
